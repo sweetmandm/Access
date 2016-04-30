@@ -9,19 +9,19 @@
 import UIKit
 import ObjectiveC
 
-typealias OnFocus = (() -> Void)
+public typealias AccessibilityFocusAction = (() -> Void)
 
 private class OnFocusWrapper {
-    var onFocus: OnFocus
-    init(onFocus: OnFocus) { self.onFocus = onFocus }
+    var onFocus: AccessibilityFocusAction
+    init(onFocus: AccessibilityFocusAction) { self.onFocus = onFocus }
 }
 
 var AssociatedOnFocus: UInt8 = 0
 var AssociatedDidLoseFocus: UInt8 = 0
 
-extension UIView {
+public extension UIView {
     
-    var onAccessibilityFocus: OnFocus? {
+    public var onAccessibilityFocus: AccessibilityFocusAction? {
         get {
             guard UIAccessibilityIsVoiceOverRunning() else { return nil }
             let wrapper = objc_getAssociatedObject(self, &AssociatedOnFocus) as? OnFocusWrapper
@@ -37,7 +37,7 @@ extension UIView {
         }
     }
     
-    var onAccessibilityDidLoseFocus: OnFocus? {
+    public var onAccessibilityDidLoseFocus: AccessibilityFocusAction? {
         get {
             guard UIAccessibilityIsVoiceOverRunning() else { return nil }
             let wrapper = objc_getAssociatedObject(self, &AssociatedDidLoseFocus) as? OnFocusWrapper
