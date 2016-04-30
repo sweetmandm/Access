@@ -43,7 +43,7 @@ public class Access {
     
     static public func focusElement(element: UIView, event: AccessibilityEventType = .Layout, delay: UInt64 = 0) {
         dispatch_after(delay, dispatch_get_main_queue(), {
-            UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, element)
+            UIAccessibilityPostNotification(event.value(), element)
         })
     }
 }
