@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "Access"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "Helpers and tools for UIAccessibility"
 
   s.description  = <<-DESC
