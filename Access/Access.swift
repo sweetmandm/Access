@@ -36,7 +36,7 @@ public class Access {
             })
         } else {
             dispatch_async(dispatch_get_main_queue(), {
-                completion?()
+                completion?(success: true)
             })
         }
     }

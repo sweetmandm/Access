@@ -8,7 +8,7 @@
 
 import UIKit
 
-public typealias ListenerCompletion = () -> Void
+public typealias ListenerCompletion = (success: Bool) -> Void
 
 let AnnouncementListener = _AnnouncementListener()
 
@@ -36,7 +36,8 @@ class _AnnouncementListener {
         if let key = notice.userInfo?[UIAccessibilityAnnouncementKeyStringValue] as? String,
             completion = listeners[key]
         {
-            completion()
+            let success = notice.userInfo?[UIAccessibilityAnnouncementKeyWasSuccessful] as? Bool ?? false
+            completion(success: success)
         }
     }
 }
