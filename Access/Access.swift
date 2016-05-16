@@ -25,7 +25,7 @@ public class Access {
     
     static public func announce(message: String, delay: UInt64 = 0, completion: ListenerCompletion? = nil) {
         if (UIAccessibilityIsVoiceOverRunning()) {
-            dispatch_after(delay, dispatch_get_main_queue(), {
+            dispatch_after(delay, dispatch_get_main_queue()) {
                 UIAccessibilityPostNotification(
                     UIAccessibilityAnnouncementNotification,
                     message
@@ -33,17 +33,17 @@ public class Access {
                 if let c = completion {
                     AnnouncementListener.listenForFinishWithCompletion(message, completion: c)
                 }
-            })
+            }
         } else {
-            dispatch_async(dispatch_get_main_queue(), {
+            dispatch_async(dispatch_get_main_queue()) {
                 completion?(success: true)
-            })
+            }
         }
     }
     
     static public func focusElement(element: UIView, event: AccessibilityEventType = .Layout, delay: UInt64 = 0) {
-        dispatch_after(delay, dispatch_get_main_queue(), {
+        dispatch_after(delay, dispatch_get_main_queue()) {
             UIAccessibilityPostNotification(event.value(), element)
-        })
+        }
     }
 }
