@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5507ABAA1CE92A860044EA79 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5507ABA91CE92A860044EA79 /* Font.swift */; };
 		55EB0F2A1CD0560600142154 /* Access.h in Headers */ = {isa = PBXBuildFile; fileRef = 55EB0F291CD0560600142154 /* Access.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55EB0F411CD0575600142154 /* Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB0F401CD0575600142154 /* Access.swift */; };
 		55EB0F431CD0592700142154 /* AnnouncementListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB0F421CD0592700142154 /* AnnouncementListener.swift */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5507ABA91CE92A860044EA79 /* Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		55EB0F261CD0560600142154 /* Access.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Access.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EB0F291CD0560600142154 /* Access.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Access.h; sourceTree = "<group>"; };
 		55EB0F2B1CD0560600142154 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			children = (
 				55EB0F291CD0560600142154 /* Access.h */,
 				55EB0F401CD0575600142154 /* Access.swift */,
+				5507ABA91CE92A860044EA79 /* Font.swift */,
 				55EB0F421CD0592700142154 /* AnnouncementListener.swift */,
 				55EB0F441CD05FFC00142154 /* UIView+AccessFocus.swift */,
 				55EB0F2B1CD0560600142154 /* Info.plist */,
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5507ABAA1CE92A860044EA79 /* Font.swift in Sources */,
 				55EB0F451CD05FFC00142154 /* UIView+AccessFocus.swift in Sources */,
 				55EB0F431CD0592700142154 /* AnnouncementListener.swift in Sources */,
 				55EB0F411CD0575600142154 /* Access.swift in Sources */,
@@ -294,6 +298,7 @@
 				55EB0F3C1CD0560700142154 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
