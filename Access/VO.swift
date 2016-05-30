@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class Access {
+public class VO {
     
     private init() {}
     
@@ -24,19 +24,20 @@ public class Access {
     }
     
     static public func announce(message: String, delay: UInt64 = 0, completion: ListenerCompletion? = nil) {
-        if (UIAccessibilityIsVoiceOverRunning()) {
-            dispatch_after(delay, dispatch_get_main_queue()) {
-                UIAccessibilityPostNotification(
-                    UIAccessibilityAnnouncementNotification,
-                    message
-                );
-                if let c = completion {
-                    AnnouncementListener.listenForFinishWithCompletion(message, completion: c)
-                }
-            }
-        } else {
+        guard UIAccessibilityIsVoiceOverRunning() else {
             dispatch_async(dispatch_get_main_queue()) {
                 completion?(success: true)
+            }
+            return
+        }
+        
+        dispatch_after(delay, dispatch_get_main_queue()) {
+            UIAccessibilityPostNotification(
+                UIAccessibilityAnnouncementNotification,
+                message
+            );
+            if let c = completion {
+                AnnouncementListener.listenForFinishWithCompletion(message, completion: c)
             }
         }
     }

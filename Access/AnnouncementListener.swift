@@ -34,7 +34,7 @@ class _AnnouncementListener {
     
     @objc func announcementFinished(notice: NSNotification) {
         if let key = notice.userInfo?[UIAccessibilityAnnouncementKeyStringValue] as? String,
-            completion = listeners[key]
+            completion = listeners.removeValueForKey(key)
         {
             let success = notice.userInfo?[UIAccessibilityAnnouncementKeyWasSuccessful] as? Bool ?? false
             completion(success: success)
