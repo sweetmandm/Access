@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5507ABAA1CE92A860044EA79 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5507ABA91CE92A860044EA79 /* Font.swift */; };
-		55D247BA1CED5E1B00D812FF /* README.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D247B91CED5E1B00D812FF /* README.swift */; };
 		55EB0F2A1CD0560600142154 /* Access.h in Headers */ = {isa = PBXBuildFile; fileRef = 55EB0F291CD0560600142154 /* Access.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55EB0F411CD0575600142154 /* VO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB0F401CD0575600142154 /* VO.swift */; };
 		55EB0F431CD0592700142154 /* AnnouncementListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB0F421CD0592700142154 /* AnnouncementListener.swift */; };
@@ -17,7 +16,7 @@
 
 /* Begin PBXFileReference section */
 		5507ABA91CE92A860044EA79 /* Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
-		55D247B91CED5E1B00D812FF /* README.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = README.swift; sourceTree = SOURCE_ROOT; };
+		55D247B91CED5E1B00D812FF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		55EB0F261CD0560600142154 /* Access.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Access.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EB0F291CD0560600142154 /* Access.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Access.h; sourceTree = "<group>"; };
 		55EB0F2B1CD0560600142154 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,7 +61,7 @@
 				55EB0F421CD0592700142154 /* AnnouncementListener.swift */,
 				55EB0F441CD05FFC00142154 /* UIView+AccessFocus.swift */,
 				55EB0F2B1CD0560600142154 /* Info.plist */,
-				55D247B91CED5E1B00D812FF /* README.swift */,
+				55D247B91CED5E1B00D812FF /* README.md */,
 			);
 			path = Access;
 			sourceTree = "<group>";
@@ -150,7 +149,6 @@
 				55EB0F451CD05FFC00142154 /* UIView+AccessFocus.swift in Sources */,
 				55EB0F431CD0592700142154 /* AnnouncementListener.swift in Sources */,
 				55EB0F411CD0575600142154 /* VO.swift in Sources */,
-				55D247BA1CED5E1B00D812FF /* README.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
