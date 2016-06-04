@@ -1,9 +1,9 @@
 //
 //  Font.swift
-//  makers
+//  Access
 //
 //  Created by David Sweetman on 4/7/16.
-//  Copyright © 2016 makers. All rights reserved.
+//  Copyright © 2016. All rights reserved.
 //
 
 import UIKit

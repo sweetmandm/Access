@@ -1,9 +1,9 @@
 //
 //  AccessibilityInstructions.swift
-//  record
+//  Access
 //
 //  Created by David Sweetman on 11/29/15.
-//  Copyright © 2015 org. All rights reserved.
+//  Copyright © 2016. All rights reserved.
 //
 
 import UIKit

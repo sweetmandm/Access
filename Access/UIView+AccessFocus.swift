@@ -1,6 +1,6 @@
 //
-//  AccessButton.swift
-//  record
+//  UIView+AccessFocus.swift
+//  Access
 //
 //  Created by David Sweetman on 3/13/16.
 //  Copyright © 2016 org. All rights reserved.
