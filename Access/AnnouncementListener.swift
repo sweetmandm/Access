@@ -19,7 +19,7 @@ class _AnnouncementListener {
     
     var listeners = [String:ListenerCompletion]()
     
-    init() {
+    private init() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(AnnouncementListener.announcementFinished(_:)),
