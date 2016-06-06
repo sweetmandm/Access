@@ -9,17 +9,17 @@
 import UIKit
 import ObjectiveC
 
-public typealias AccessibilityFocusAction = (() -> Void)
-
-private class OnFocusWrapper {
-    var onFocus: AccessibilityFocusAction
-    init(onFocus: AccessibilityFocusAction) { self.onFocus = onFocus }
-}
-
-var AssociatedOnFocus: UInt8 = 0
-var AssociatedDidLoseFocus: UInt8 = 0
+private var AssociatedOnFocus: UInt8 = 0
+private var AssociatedDidLoseFocus: UInt8 = 0
 
 public extension UIView {
+    
+    public typealias AccessibilityFocusAction = (() -> Void)
+    
+    private class OnFocusWrapper {
+        var onFocus: AccessibilityFocusAction
+        init(onFocus: AccessibilityFocusAction) { self.onFocus = onFocus }
+    }
     
     public var onAccessibilityFocus: AccessibilityFocusAction? {
         get {
