@@ -174,6 +174,29 @@ public class Font {
     
     public enum FontStyle {
         case Light, Regular, Bold, LightItalic, Italic, BoldItalic
+        
+        func symbolicTraits() -> UIFontDescriptorSymbolicTraits? {
+            switch self {
+            case .Bold:
+                return .TraitBold
+            case .Italic:
+                return .TraitItalic
+            case .BoldItalic:
+                return [.TraitBold, .TraitItalic]
+            default:
+                return nil
+            }
+        }
+        
+        func attributes() -> [String: AnyObject]? {
+            switch self {
+            case .Light,
+                 .LightItalic:
+                return [UIFontDescriptorFaceAttribute: "Light"]
+            default:
+                return nil
+            }
+        }
     }
     
     public enum TextType {
@@ -200,9 +223,17 @@ public class Font {
         let fontSize = fontConfigurations[configName]?.sizeMap[contentSize] ?? 13
         let scaledFontSize = CGFloat(fontSize) * scale
         guard let name = self.nameForStyle(style, configName: configName) else {
-            return UIFontDescriptor
+            var descriptor =  UIFontDescriptor
                 .preferredFontDescriptorWithTextStyle(type.toString())
                 .fontDescriptorWithSize(scaledFontSize)
+            if let traits = style.symbolicTraits() {
+                descriptor = descriptor.fontDescriptorWithSymbolicTraits(traits)
+            }
+            if let attributes = style.attributes() {
+                descriptor = descriptor.fontDescriptorByAddingAttributes(attributes)
+            }
+            
+            return descriptor
         }
         return UIFontDescriptor(name: name, size: scaledFontSize)
     }
