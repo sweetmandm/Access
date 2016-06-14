@@ -12,6 +12,7 @@
 		55EB0F411CD0575600142154 /* VO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB0F401CD0575600142154 /* VO.swift */; };
 		55EB0F431CD0592700142154 /* AnnouncementListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB0F421CD0592700142154 /* AnnouncementListener.swift */; };
 		55EB0F451CD05FFC00142154 /* UIView+AccessFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB0F441CD05FFC00142154 /* UIView+AccessFocus.swift */; };
+		64BCF12A1D0FAF69001A2B9C /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BCF1291D0FAF69001A2B9C /* Stepper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		55EB0F401CD0575600142154 /* VO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VO.swift; sourceTree = "<group>"; };
 		55EB0F421CD0592700142154 /* AnnouncementListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementListener.swift; sourceTree = "<group>"; };
 		55EB0F441CD05FFC00142154 /* UIView+AccessFocus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AccessFocus.swift"; sourceTree = "<group>"; };
+		64BCF1291D0FAF69001A2B9C /* Stepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stepper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				5507ABA91CE92A860044EA79 /* Font.swift */,
 				55EB0F421CD0592700142154 /* AnnouncementListener.swift */,
 				55EB0F441CD05FFC00142154 /* UIView+AccessFocus.swift */,
+				64BCF1291D0FAF69001A2B9C /* Stepper.swift */,
 				55EB0F2B1CD0560600142154 /* Info.plist */,
 				55D247B91CED5E1B00D812FF /* README.md */,
 			);
@@ -147,6 +150,7 @@
 			files = (
 				5507ABAA1CE92A860044EA79 /* Font.swift in Sources */,
 				55EB0F451CD05FFC00142154 /* UIView+AccessFocus.swift in Sources */,
+				64BCF12A1D0FAF69001A2B9C /* Stepper.swift in Sources */,
 				55EB0F431CD0592700142154 /* AnnouncementListener.swift in Sources */,
 				55EB0F411CD0575600142154 /* VO.swift in Sources */,
 			);

@@ -127,3 +127,30 @@ button.onAccessibilityDidLoseFocus = {
     print("The button lost focus")
 }
 ```
+
+## Access.Stepper
+
+The `UIStepper` UIKit component is not highly accessible. Since its buttons are private, there's not a good way to update their accessibility attributes, which would be helpful to provide VoiceOver users with extra context for what the stepper value represets.
+
+I think `Access.Stepper` represents an accessibility improvement over the UIStepper since the stepper is very well-suited to the adopt UIAccessibilityTraitAdjustable and can be represented as a single interactive component.
+
+Example:
+```
+func setupStepper() {
+    let stepper = Access.Stepper()
+    view.addSubview(stepper)
+    stepper.accessibilityLabel = "My Step-able Item"
+    stepper.addTarget(self, action: #selector(didStep), forControlEvents: .ValueChanged)
+    updateStepperValue()
+}
+
+@IBAction func didStep(sender: AnyObject) {
+    updateCustomStepperValue()
+}
+
+func updateStepperValue() {
+    // The Stepper will use its 'value' property as the default accessibilityValue.
+    // If you need to provide extra context, you can adjust it:
+    customStepper.accessibilityValue ="\(Int(value)) Items" 
+}
+```
