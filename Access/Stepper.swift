@@ -17,53 +17,53 @@ import UIKit
  *  You can set its accessibilityLabel and respond to .ValueChanged to update its accessibilityValue.
  */
 
-class Stepper: UIStepper
+public class Stepper: UIStepper
 {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
     
-    override var value: Double {
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    override public var value: Double {
         didSet {
             updateAccessibilityAttributes()
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    func setup() {
+    private func setup() {
         setupAccessibility()
         updateAccessibilityAttributes()
     }
     
-    func setupAccessibility() {
+    private func updateAccessibilityAttributes() {
+        accessibilityValue = String(value)
+    }
+    
+    private func setupAccessibility() {
         self.isAccessibilityElement = true
         self.accessibilityTraits = UIAccessibilityTraitAdjustable
     }
     
-    override func accessibilityIncrement() {
-        value += stepValue
-        sendActionsForControlEvents(.ValueChanged)
-        announceValue()
-    }
-    
-    override func accessibilityDecrement() {
-        value -= stepValue
-        sendActionsForControlEvents(.ValueChanged)
-        announceValue()
-    }
-    
-    func announceValue() {
+    private func announceValue() {
         if let announcement = self.accessibilityValue where !announcement.isEmpty {
             Access.VO.announce(announcement)
         }
     }
     
-    private func updateAccessibilityAttributes() {
-        accessibilityValue = String(value)
+    override public func accessibilityIncrement() {
+        value += stepValue
+        sendActionsForControlEvents(.ValueChanged)
+        announceValue()
+    }
+    
+    override public func accessibilityDecrement() {
+        value -= stepValue
+        sendActionsForControlEvents(.ValueChanged)
+        announceValue()
     }
 }
