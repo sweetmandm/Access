@@ -23,11 +23,16 @@ public class VO {
         }
     }
     
+    static func handleVoiceoverDisabled(completion: ListenerCompletion?) {
+        guard let completion = completion else { return }
+        dispatch_async(dispatch_get_main_queue()) {
+            completion(success: true)
+        }
+    }
+    
     static public func announce(message: String, delay: UInt64 = 0, completion: ListenerCompletion? = nil) {
         guard UIAccessibilityIsVoiceOverRunning() else {
-            dispatch_async(dispatch_get_main_queue()) {
-                completion?(success: true)
-            }
+            handleVoiceoverDisabled(completion)
             return
         }
         
