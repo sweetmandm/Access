@@ -17,6 +17,11 @@ public extension UIFont {
         let descriptor = Font.descriptorWith(textType: textType, fontStyle: fontStyle, configName: configName)
         self.init(descriptor: descriptor, size: descriptor.pointSize)
     }
+    
+    convenience init(staticSize: CGFloat, fontStyle: Font.FontStyle, configName: String = Font.PrimaryFontConfigurationName) {
+        let descriptor = Font.descriptorWith(staticSize: staticSize, fontStyle: fontStyle, configName: configName)
+        self.init(descriptor: descriptor, size: descriptor.pointSize)
+    }
 }
 
 public class Font {
@@ -151,8 +156,8 @@ public class Font {
         var fontNames: [Font.FontStyle: String]?
         
         public init(sizeMap: SizeMap = Font.defaultSizeMap(),
-             styleScale: TextStyleScaleMap = Font.defaultStyleScale(),
-             fontNames: [Font.FontStyle: String]? = nil)
+                    styleScale: TextStyleScaleMap = Font.defaultStyleScale(),
+                    fontNames: [Font.FontStyle: String]? = nil)
         {
             self.sizeMap = sizeMap
             self.styleScale = styleScale
@@ -220,7 +225,7 @@ public class Font {
     private static func descriptorWith(textType type: Font.TextType, fontStyle style: Font.FontStyle, configName: String) -> UIFontDescriptor {
         let contentSize = UIApplication.sharedApplication().preferredContentSizeCategory
         let scale = scaleFactorForTextType(type, configName: configName)
-        let fontSize = fontConfigurations[configName]?.sizeMap[contentSize] ?? 13
+        let fontSize = fontConfigurations[configName]?.sizeMap[contentSize] ?? 13.0
         let scaledFontSize = CGFloat(fontSize) * scale
         guard let name = self.nameForStyle(style, configName: configName) else {
             var descriptor =  UIFontDescriptor
@@ -238,4 +243,19 @@ public class Font {
         return UIFontDescriptor(name: name, size: scaledFontSize)
     }
     
+    private static func descriptorWith(staticSize staticSize: CGFloat, fontStyle style: Font.FontStyle, configName: String) -> UIFontDescriptor {
+        guard let name = self.nameForStyle(style, configName: configName) else {
+            let systemFont = UIFont.systemFontOfSize(staticSize)
+            var descriptor = UIFontDescriptor(name: systemFont.fontName, size: staticSize)
+            if let traits = style.symbolicTraits() {
+                descriptor = descriptor.fontDescriptorWithSymbolicTraits(traits)
+            }
+            if let attributes = style.attributes() {
+                descriptor = descriptor.fontDescriptorByAddingAttributes(attributes)
+            }
+            
+            return descriptor
+        }
+        return UIFontDescriptor(name: name, size: staticSize)
+    }
 }
