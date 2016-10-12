@@ -16,9 +16,9 @@ public extension UIView {
     
     public typealias AccessibilityFocusAction = (() -> Void)
     
-    private class OnFocusWrapper {
+    fileprivate class OnFocusWrapper {
         var onFocus: AccessibilityFocusAction
-        init(onFocus: AccessibilityFocusAction) { self.onFocus = onFocus }
+        init(onFocus: @escaping AccessibilityFocusAction) { self.onFocus = onFocus }
     }
     
     public var onAccessibilityFocus: AccessibilityFocusAction? {

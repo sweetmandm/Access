@@ -23,12 +23,12 @@ public func disableAccessibleSwipeBack() {
 }
 
 extension UIViewController {
-    override public func accessibilityScroll(direction: UIAccessibilityScrollDirection) -> Bool {
+    override open func accessibilityScroll(_ direction: UIAccessibilityScrollDirection) -> Bool {
         guard shouldAllowAccessibleSwipeBack else { return false }
-        guard let nav = self.navigationController where nav.viewControllers.count > 1 else { return false }
+        guard let nav = self.navigationController, nav.viewControllers.count > 1 else { return false }
         
-        if (direction == .Right) {
-            nav.popViewControllerAnimated(true)
+        if (direction == .right) {
+            nav.popViewController(animated: true)
         }
         
         return true

@@ -8,35 +8,35 @@
 
 import UIKit
 
-public class VO {
+open class VO {
     
-    private init() {}
+    fileprivate init() {}
     
     public enum AccessibilityEventType {
-        case Layout
-        case ScreenChange
+        case layout
+        case screenChange
         func value() -> UIAccessibilityNotifications {
             switch (self) {
-            case .Layout: return UIAccessibilityLayoutChangedNotification
-            case .ScreenChange: return UIAccessibilityScreenChangedNotification
+            case .layout: return UIAccessibilityLayoutChangedNotification
+            case .screenChange: return UIAccessibilityScreenChangedNotification
             }
         }
     }
     
-    static func handleVoiceoverDisabled(completion: ListenerCompletion?) {
+    static func handleVoiceoverDisabled(_ completion: ListenerCompletion?) {
         guard let completion = completion else { return }
-        dispatch_async(dispatch_get_main_queue()) {
-            completion(success: true)
+        DispatchQueue.main.async {
+            completion(true)
         }
     }
     
-    static public func announce(message: String, delay: UInt64 = 0, completion: ListenerCompletion? = nil) {
+    static open func announce(_ message: String, delay: UInt64 = 0, completion: ListenerCompletion? = nil) {
         guard UIAccessibilityIsVoiceOverRunning() else {
             handleVoiceoverDisabled(completion)
             return
         }
         
-        dispatch_after(delay, dispatch_get_main_queue()) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: delay)) {
             UIAccessibilityPostNotification(
                 UIAccessibilityAnnouncementNotification,
                 message
@@ -47,8 +47,8 @@ public class VO {
         }
     }
     
-    static public func focusElement(element: UIView, event: AccessibilityEventType = .Layout, delay: UInt64 = 0) {
-        dispatch_after(delay, dispatch_get_main_queue()) {
+    static open func focusElement(_ element: UIView, event: AccessibilityEventType = .layout, delay: UInt64 = 0) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: delay)) {
             UIAccessibilityPostNotification(event.value(), element)
         }
     }
