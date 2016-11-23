@@ -12,7 +12,7 @@ import ObjectiveC
 private var AssociatedOnFocus: UInt8 = 0
 private var AssociatedDidLoseFocus: UInt8 = 0
 
-public extension UIView {
+extension UIView {
     
     public typealias AccessibilityFocusAction = (() -> Void)
     
@@ -53,11 +53,11 @@ public extension UIView {
         }
     }
     
-    override public func accessibilityElementDidBecomeFocused() {
+    override open func accessibilityElementDidBecomeFocused() {
         self.onAccessibilityFocus?()
     }
     
-    override public func accessibilityElementDidLoseFocus() {
+    override open func accessibilityElementDidLoseFocus() {
         self.onAccessibilityDidLoseFocus?()
     }
     
