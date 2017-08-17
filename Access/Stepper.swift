@@ -17,7 +17,7 @@ import UIKit
  *  You can set its accessibilityLabel and respond to .ValueChanged to update its accessibilityValue.
  */
 
-public class Stepper: UIStepper
+open class Stepper: UIStepper
 {
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,41 +29,41 @@ public class Stepper: UIStepper
         setup()
     }
     
-    override public var value: Double {
+    override open var value: Double {
         didSet {
             updateAccessibilityAttributes()
         }
     }
     
-    private func setup() {
+    fileprivate func setup() {
         setupAccessibility()
         updateAccessibilityAttributes()
     }
     
-    private func updateAccessibilityAttributes() {
+    fileprivate func updateAccessibilityAttributes() {
         accessibilityValue = String(value)
     }
     
-    private func setupAccessibility() {
+    fileprivate func setupAccessibility() {
         self.isAccessibilityElement = true
         self.accessibilityTraits = UIAccessibilityTraitAdjustable
     }
     
-    private func announceValue() {
-        if let announcement = self.accessibilityValue where !announcement.isEmpty {
+    fileprivate func announceValue() {
+        if let announcement = self.accessibilityValue, !announcement.isEmpty {
             Access.VO.announce(announcement)
         }
     }
     
-    override public func accessibilityIncrement() {
+    override open func accessibilityIncrement() {
         value += stepValue
-        sendActionsForControlEvents(.ValueChanged)
+        sendActions(for: .valueChanged)
         announceValue()
     }
     
-    override public func accessibilityDecrement() {
+    override open func accessibilityDecrement() {
         value -= stepValue
-        sendActionsForControlEvents(.ValueChanged)
+        sendActions(for: .valueChanged)
         announceValue()
     }
 }

@@ -12,13 +12,13 @@ import ObjectiveC
 private var AssociatedOnFocus: UInt8 = 0
 private var AssociatedDidLoseFocus: UInt8 = 0
 
-public extension UIView {
+extension UIView {
     
     public typealias AccessibilityFocusAction = (() -> Void)
     
-    private class OnFocusWrapper {
+    fileprivate class OnFocusWrapper {
         var onFocus: AccessibilityFocusAction
-        init(onFocus: AccessibilityFocusAction) { self.onFocus = onFocus }
+        init(onFocus: @escaping AccessibilityFocusAction) { self.onFocus = onFocus }
     }
     
     public var onAccessibilityFocus: AccessibilityFocusAction? {
@@ -53,11 +53,11 @@ public extension UIView {
         }
     }
     
-    override public func accessibilityElementDidBecomeFocused() {
+    override open func accessibilityElementDidBecomeFocused() {
         self.onAccessibilityFocus?()
     }
     
-    override public func accessibilityElementDidLoseFocus() {
+    override open func accessibilityElementDidLoseFocus() {
         self.onAccessibilityDidLoseFocus?()
     }
     

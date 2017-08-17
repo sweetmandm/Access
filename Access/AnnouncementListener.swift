@@ -8,7 +8,7 @@
 
 import UIKit
 
-public typealias ListenerCompletion = (success: Bool) -> Void
+public typealias ListenerCompletion = (_ success: Bool) -> Void
 
 let AnnouncementListener = _AnnouncementListener()
 
@@ -19,25 +19,25 @@ class _AnnouncementListener {
     
     var listeners = [String:ListenerCompletion]()
     
-    private init() {
-        NSNotificationCenter.defaultCenter().addObserver(
+    fileprivate init() {
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(AnnouncementListener.announcementFinished(_:)),
-            name: UIAccessibilityAnnouncementDidFinishNotification,
+            name: NSNotification.Name.UIAccessibilityAnnouncementDidFinish,
             object: nil
         )
     }
     
-    func listenForFinishWithCompletion(message: String, completion: ListenerCompletion) {
+    func listenForFinishWithCompletion(_ message: String, completion: @escaping ListenerCompletion) {
         listeners[message] = completion
     }
     
-    @objc func announcementFinished(notice: NSNotification) {
-        if let key = notice.userInfo?[UIAccessibilityAnnouncementKeyStringValue] as? String,
-            completion = listeners.removeValueForKey(key)
+    @objc func announcementFinished(_ notice: Notification) {
+        if let key = (notice as NSNotification).userInfo?[UIAccessibilityAnnouncementKeyStringValue] as? String,
+            let completion = listeners.removeValue(forKey: key)
         {
-            let success = notice.userInfo?[UIAccessibilityAnnouncementKeyWasSuccessful] as? Bool ?? false
-            completion(success: success)
+            let success = (notice as NSNotification).userInfo?[UIAccessibilityAnnouncementKeyWasSuccessful] as? Bool ?? false
+            completion(success)
         }
     }
 }

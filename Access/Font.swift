@@ -24,25 +24,25 @@ public extension UIFont {
     }
 }
 
-public class Font {
+open class Font {
     
-    public static let PrimaryFontConfigurationName = "PrimaryFontConfiguration"
+    open static let PrimaryFontConfigurationName = "PrimaryFontConfiguration"
     
-    public static func configure(configuration: FontConfiguration, configName: String = PrimaryFontConfigurationName) {
+    open static func configure(_ configuration: FontConfiguration, configName: String = PrimaryFontConfigurationName) {
         Font.fontConfigurations[configName] = configuration
     }
     
-    public static func create(type: TextType, style: FontStyle, configName: String = PrimaryFontConfigurationName) -> UIFont {
+    open static func create(_ type: TextType, style: FontStyle, configName: String = PrimaryFontConfigurationName) -> UIFont {
         return UIFont(textType: type, fontStyle: style, configName: configName)
     }
     
     /**
      * SizeMap associates UIContentSizeCategory keys with their default point size.
      */
-    public typealias SizeMap = [String: CGFloat]
+    public typealias SizeMap = [UIContentSizeCategory: CGFloat]
     
-    public static func makeSizeMap(
-        extraSmall extraSmall: CGFloat,
+    open static func makeSizeMap(
+        extraSmall: CGFloat,
                    small: CGFloat,
                    medium: CGFloat,
                    large: CGFloat,
@@ -58,22 +58,22 @@ public class Font {
         -> SizeMap
     {
         return [
-            UIContentSizeCategoryExtraSmall: extraSmall,
-            UIContentSizeCategorySmall: small,
-            UIContentSizeCategoryMedium: medium,
-            UIContentSizeCategoryLarge: large,
-            UIContentSizeCategoryExtraLarge: extraLarge,
-            UIContentSizeCategoryExtraExtraLarge: extraExtraLarge,
-            UIContentSizeCategoryExtraExtraExtraLarge: extraExtraExtraLarge,
-            UIContentSizeCategoryAccessibilityMedium: accessibilityMedium,
-            UIContentSizeCategoryAccessibilityLarge: accessibilityLarge,
-            UIContentSizeCategoryAccessibilityExtraLarge: accessibilityExtraLarge,
-            UIContentSizeCategoryAccessibilityExtraExtraLarge: accessibilityExtraExtraLarge,
-            UIContentSizeCategoryAccessibilityExtraExtraExtraLarge: accessibilityExtraExtraExtraLarge
+            .extraSmall: extraSmall,
+            .small: small,
+            .medium: medium,
+            .large: large,
+            .extraLarge: extraLarge,
+            .extraExtraLarge: extraExtraLarge,
+            .extraExtraExtraLarge: extraExtraExtraLarge,
+            .accessibilityMedium: accessibilityMedium,
+            .accessibilityLarge: accessibilityLarge,
+            .accessibilityExtraLarge: accessibilityExtraLarge,
+            .accessibilityExtraExtraLarge: accessibilityExtraExtraLarge,
+            .accessibilityExtraExtraExtraLarge: accessibilityExtraExtraExtraLarge
         ]
     }
     
-    private static func defaultSizeMap() -> SizeMap {
+    fileprivate static func defaultSizeMap() -> SizeMap {
         return  Font.makeSizeMap(
             extraSmall: 13.0,
             small: 16.0,
@@ -93,30 +93,30 @@ public class Font {
     /**
      * TextStyleScale associates UIFontTextStyle keys with their default scale factors.
      */
-    public typealias TextStyleScaleMap = [String: CGFloat]
+    public typealias TextStyleScaleMap = [UIFontTextStyle: CGFloat]
     
-    public static func makeTextStyleScale(
-        headline headline: CGFloat,
-                 subheadline: CGFloat,
-                 body: CGFloat,
-                 callout: CGFloat,
-                 caption1: CGFloat,
-                 caption2: CGFloat,
-                 footnote: CGFloat
+    open static func makeTextStyleScale(
+        headline: CGFloat,
+        subheadline: CGFloat,
+        body: CGFloat,
+        callout: CGFloat,
+        caption1: CGFloat,
+        caption2: CGFloat,
+        footnote: CGFloat
         )
         -> TextStyleScaleMap
     {
         return [
-            UIFontTextStyleHeadline: headline,
-            UIFontTextStyleSubheadline: subheadline,
-            UIFontTextStyleBody: body,
-            UIFontTextStyleCaption1: caption1,
-            UIFontTextStyleCaption2: caption2,
-            UIFontTextStyleFootnote: footnote
+            .headline: headline,
+            .subheadline: subheadline,
+            .body: body,
+            .caption1: caption1,
+            .caption2: caption2,
+            .footnote: footnote
         ]
     }
     
-    private static func defaultStyleScale() -> TextStyleScaleMap {
+    fileprivate static func defaultStyleScale() -> TextStyleScaleMap {
         return Font.makeTextStyleScale(
             headline: 1.2,
             subheadline: 1.1,
@@ -128,24 +128,24 @@ public class Font {
         )
     }
     
-    public static func makeFontNames(
-        light light: String? = nil,
-              regular: String? = nil,
-              bold: String? = nil,
-              lightItalic: String? = nil,
-              italic: String? = nil,
-              boldItalic: String? = nil
+    open static func makeFontNames(
+        light: String? = nil,
+        regular: String? = nil,
+        bold: String? = nil,
+        lightItalic: String? = nil,
+        italic: String? = nil,
+        boldItalic: String? = nil
         )
         -> [Font.FontStyle: String]
     {
         var names: [Font.FontStyle: String] = [:]
         let namesWithNils: [Font.FontStyle: String?] = [
-            .Light: light,
-            .Regular: regular,
-            .Bold: bold,
-            .LightItalic: lightItalic,
-            .Italic: italic,
-            .BoldItalic: boldItalic
+            .light: light,
+            .regular: regular,
+            .bold: bold,
+            .lightItalic: lightItalic,
+            .italic: italic,
+            .boldItalic: boldItalic
         ]
         namesWithNils.forEach { (key, value) in
             if let value = value { names[key] = value }
@@ -176,21 +176,21 @@ public class Font {
         )
     ]
     
-    private static func scaleFactorForTextType(type: Font.TextType, configName: String) -> CGFloat {
-        return fontConfigurations[configName]?.styleScale[type.toString()] ?? 1.0
+    fileprivate static func scaleFactorFor(textType: Font.TextType, configName: String) -> CGFloat {
+        return fontConfigurations[configName]?.styleScale[textType.toUIFontTextStyle()] ?? 1.0
     }
     
     public enum FontStyle {
-        case Light, Regular, Bold, LightItalic, Italic, BoldItalic
+        case light, regular, bold, lightItalic, italic, boldItalic
         
         func symbolicTraits() -> UIFontDescriptorSymbolicTraits? {
             switch self {
-            case .Bold:
-                return .TraitBold
-            case .Italic:
-                return .TraitItalic
-            case .BoldItalic:
-                return [.TraitBold, .TraitItalic]
+            case .bold:
+                return .traitBold
+            case .italic:
+                return .traitItalic
+            case .boldItalic:
+                return [.traitBold, .traitItalic]
             default:
                 return nil
             }
@@ -198,9 +198,9 @@ public class Font {
         
         func attributes() -> [String: AnyObject]? {
             switch self {
-            case .Light,
-                 .LightItalic:
-                return [UIFontDescriptorFaceAttribute: "Light"]
+            case .light,
+                 .lightItalic:
+                return [UIFontDescriptorFaceAttribute: "Light" as AnyObject]
             default:
                 return nil
             }
@@ -208,37 +208,39 @@ public class Font {
     }
     
     public enum TextType {
-        case Headline, Subheadline, Body, Caption1, Caption2, Footnote
-        internal func toString() -> String {
+        case headline, subheadline, body, caption1, caption2, footnote
+        internal func toUIFontTextStyle() -> UIFontTextStyle {
             switch self {
-            case .Headline: return UIFontTextStyleHeadline
-            case .Subheadline: return UIFontTextStyleSubheadline
-            case .Body: return UIFontTextStyleBody
-            case .Caption1: return UIFontTextStyleCaption1
-            case .Caption2: return UIFontTextStyleCaption2
-            case .Footnote: return UIFontTextStyleFootnote
+            case .headline: return UIFontTextStyle.headline
+            case .subheadline: return UIFontTextStyle.subheadline
+            case .body: return UIFontTextStyle.body
+            case .caption1: return UIFontTextStyle.caption1
+            case .caption2: return UIFontTextStyle.caption2
+            case .footnote: return UIFontTextStyle.footnote
             }
         }
     }
     
-    private static func nameForStyle(type: Font.FontStyle, configName: String) -> String? {
-        return fontConfigurations[configName]?.fontNames?[type]
+    fileprivate static func nameFor(fontStyle: Font.FontStyle, configName: String) -> String? {
+        return fontConfigurations[configName]?.fontNames?[fontStyle]
     }
     
-    private static func descriptorWith(textType type: Font.TextType, fontStyle style: Font.FontStyle, configName: String) -> UIFontDescriptor {
-        let contentSize = UIApplication.sharedApplication().preferredContentSizeCategory
-        let scale = scaleFactorForTextType(type, configName: configName)
+    fileprivate static func descriptorWith(textType type: Font.TextType, fontStyle style: Font.FontStyle, configName: String) -> UIFontDescriptor {
+        let contentSize = UIApplication.shared.preferredContentSizeCategory
+        let scale = scaleFactorFor(textType: type, configName: configName)
         let fontSize = fontConfigurations[configName]?.sizeMap[contentSize] ?? 13.0
         let scaledFontSize = CGFloat(fontSize) * scale
-        guard let name = self.nameForStyle(style, configName: configName) else {
-            var descriptor =  UIFontDescriptor
-                .preferredFontDescriptorWithTextStyle(type.toString())
-                .fontDescriptorWithSize(scaledFontSize)
-            if let traits = style.symbolicTraits() {
-                descriptor = descriptor.fontDescriptorWithSymbolicTraits(traits)
+        guard let name = self.nameFor(fontStyle: style, configName: configName) else {
+            var descriptor = UIFontDescriptor
+                .preferredFontDescriptor(withTextStyle: type.toUIFontTextStyle())
+                .withSize(scaledFontSize)
+            if let traits = style.symbolicTraits(),
+                let newValue = descriptor.withSymbolicTraits(traits)
+            {
+                descriptor = newValue
             }
             if let attributes = style.attributes() {
-                descriptor = descriptor.fontDescriptorByAddingAttributes(attributes)
+                descriptor = descriptor.addingAttributes(attributes)
             }
             
             return descriptor
@@ -246,15 +248,15 @@ public class Font {
         return UIFontDescriptor(name: name, size: scaledFontSize)
     }
     
-    private static func descriptorWith(staticSize staticSize: CGFloat, fontStyle style: Font.FontStyle, configName: String) -> UIFontDescriptor {
-        guard let name = self.nameForStyle(style, configName: configName) else {
-            let systemFont = UIFont.systemFontOfSize(staticSize)
+    fileprivate static func descriptorWith(staticSize: CGFloat, fontStyle style: Font.FontStyle, configName: String) -> UIFontDescriptor {
+        guard let name = self.nameFor(fontStyle: style, configName: configName) else {
+            let systemFont = UIFont.systemFont(ofSize: staticSize)
             var descriptor = UIFontDescriptor(name: systemFont.fontName, size: staticSize)
             if let traits = style.symbolicTraits() {
-                descriptor = descriptor.fontDescriptorWithSymbolicTraits(traits)
+                descriptor = descriptor.withSymbolicTraits(traits)!
             }
             if let attributes = style.attributes() {
-                descriptor = descriptor.fontDescriptorByAddingAttributes(attributes)
+                descriptor = descriptor.addingAttributes(attributes)
             }
             
             return descriptor
