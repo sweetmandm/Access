@@ -73,7 +73,7 @@ open class Font {
         ]
     }
     
-    fileprivate static func defaultSizeMap() -> SizeMap {
+    public static func defaultSizeMap() -> SizeMap {
         return  Font.makeSizeMap(
             extraSmall: 13.0,
             small: 16.0,
@@ -116,7 +116,7 @@ open class Font {
         ]
     }
     
-    fileprivate static func defaultStyleScale() -> TextStyleScaleMap {
+    public static func defaultStyleScale() -> TextStyleScaleMap {
         return Font.makeTextStyleScale(
             headline: 1.2,
             subheadline: 1.1,
@@ -196,11 +196,11 @@ open class Font {
             }
         }
         
-        func attributes() -> [String: AnyObject]? {
+        func attributes() -> [UIFontDescriptor.AttributeName: AnyObject]? {
             switch self {
             case .light,
                  .lightItalic:
-                return [UIFontDescriptorFaceAttribute: "Light" as AnyObject]
+                return [.face: "Light" as AnyObject]
             default:
                 return nil
             }
